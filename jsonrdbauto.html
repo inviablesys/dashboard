@@ -1,0 +1,73 @@
+<html lang="es">
+<head>
+    <title>Prueba AJAX-JSON</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            // Tiempo de actualización en milisegundos
+            const tiempo = 10000;
+
+            alert("Los datos se actualizarán cada " + tiempo / 1000 + " segundos");
+
+            const getDatos = function () {
+                $.ajax({
+                  dataType: "json",
+                  url: "datostemphum2.json",
+                  success: function (data) {
+                      const temperatura =$("#temperatura #valor");
+                      const hum = $("#humedad #valor");
+                     // const estado = $("#estado");
+                      const hora = $("#hora");
+
+                      hora.empty().html(new Date());
+
+                      // Muestra el texto para la temperatura
+                      temperatura.empty().html(data.temperatura);
+
+                      // Se añade la clase CSS "valor-ok" para los valores entre 45 y 55
+                      if (data.humedad >= 45 && data.humedad <= 55) {
+                          hum.addClass("valor-ok")
+                      }
+
+                      // Muestra el texto para humedad
+                      hum.empty().html(data.humedad);
+
+                      // Limpia los estados para actualizar
+                      //estado.empty();
+
+                      // Recorrer el objeto data.estado y mostrar los elementos que contiene
+                      // Por cada elemento se crea un <div> para el texto y el valor
+                      //for (var clave in data.estado) {
+                        //  if (data.estado.hasOwnProperty(clave)) {
+                          //    estado.append("<div>Estado " + clave + ": <span id='valor'>" + data.estado[clave] + "</valor></div>");
+                         // }
+                      //}
+                    }
+                 });
+            };
+
+            // Realizar la primera actualización
+            getDatos();
+
+            // Programar la actualización a intérvalos
+            window.setInterval(getDatos, tiempo);
+        });
+    </script>
+    <style>
+        .valor-ok { background-color: green; color: white}
+    </style>
+</head>
+<body>
+    <div id="temperatura">
+        Temperatura: <span id="valor"></span>&ordm;C
+    </div>
+    <div id="humedad">
+        Humedad: <span id="valor"></span>&percnt;
+    </div>
+    <!-- Esta etiqueta está vacía porque se genera automáticamente a partir del objeto data.estado -->
+    <div id="estado"></div>
+    <div id="hora"></div>
+<body>
+</html>

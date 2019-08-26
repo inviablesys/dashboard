@@ -1,0 +1,49 @@
+<html lang="es">
+<head>
+    <title>Prueba AJAX-JSON</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document ).ready(function() {
+            $.ajax({
+              dataType: "json",
+              url: "datos.json",
+              success: function (data) {
+                  $("#temperatura #valor").html(data.temperatura);
+
+                  const hum = $("#humedad #valor")
+
+                  // Se añade la clase CSS "valor-ok" para los valores entre 45 y 55
+                  if (data.humedad >= 45 && data.humedad <= 55) {
+                      hum.addClass("valor-ok")
+                  }
+
+                  hum.html(data.humedad);
+
+                  // Recorrer el objeto data.estado y mostrar los elementos que contiene
+                  // Por cada elemento se crea un <div> para el texto y el valor
+                  for (var clave in data.estado) {
+                      if (data.estado.hasOwnProperty(clave)) {
+                          $("#estado").append("<div>Estado " + clave + ": <span id='valor'>" + data.estado[clave] + "</valor></div>");
+                      }
+                  }
+              }
+            });
+        });
+    </script>
+    <style>
+        .valor-ok { background-color: green; color: white}
+    </style>
+</head>
+<body>
+    <div id="temperatura">
+        Temperatura: <span id="valor"></span>&ordm;C
+    </div>
+    <div id="humedad">
+        Humedad: <span id="valor"></span>&percnt;
+    </div>
+    <!-- Esta etiqueta está vacía porque se genera automáticamente a partir del objeto data.estado -->
+    <div id="estado"></div>
+<body>
+</html>

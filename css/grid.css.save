@@ -1,0 +1,19 @@
+.grid-container {
+  display: grid;
+  background-color: orange;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "Temperatura Temperatura Toallero Salón" "Temperatura Temperatura Cuarto-Marta Alarma";
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+
+.Temperatura { grid-area: Temperatura; background-color: red}
+
+.Toallero { grid-area: Toallero; }
+
+.Salón { grid-area: Salón; }
+
+.Cuarto-Marta { grid-area: Cuarto-Marta; }
+
+.Alarma { grid-area: Alarma; }

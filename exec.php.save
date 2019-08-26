@@ -1,0 +1,8 @@
+<?php
+exec('ls -lart',$output,$variable);
+print_r($output);
+var_dump($output);
+echo "</br>$variable</br>";
+$s = shell_exec('ls -lart');
+echo "<pre>$s</pre>";
+?>

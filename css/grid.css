@@ -1,0 +1,21 @@
+.grid-container {
+
+  display: grid;
+  background-color: #2196F3;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: "Temperatura Temperatura Toallero Salon" "Temperatura Temperatura Cuarto-Marta Alarma";
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
